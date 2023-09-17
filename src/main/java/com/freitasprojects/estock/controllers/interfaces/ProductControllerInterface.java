@@ -1,7 +1,7 @@
 package com.freitasprojects.estock.controllers.interfaces;
 
-import com.freitasprojects.estock.models.entities.Product;
+import com.freitasprojects.estock.models.dtos.ProductDTO;
 
-public interface ProductControllerInterface extends ControllerInterface<Product>{
+public interface ProductControllerInterface extends ControllerInterface<ProductDTO>{
 
 }
