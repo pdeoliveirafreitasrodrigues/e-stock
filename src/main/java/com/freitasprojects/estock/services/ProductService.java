@@ -5,6 +5,7 @@ import com.freitasprojects.estock.models.entities.Product;
 import com.freitasprojects.estock.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import static com.freitasprojects.estock.consts.ExceptionConsts.PRODUCT_INSERT_ERROR;
 import static java.util.stream.Collectors.toList;
 
+@Service
 public class ProductService{
 
     @Autowired

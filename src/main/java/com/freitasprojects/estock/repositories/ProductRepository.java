@@ -12,11 +12,11 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long > {
 
-    Optional<Product> findByName(String name);
+    Optional<Product> findByDescription(String description);
     Optional<Product> findByCode(String code);
     Optional<Product> findByCostPrice(Float costPrice);
 
-    @Query("SELECT p.description FROM PRODUCT p")
-    List<String> findProductDescriptions();
+    /*@Query("SELECT p.description FROM PRODUCT p")
+    List<String> findProductDescriptions();*/
 
 }
