@@ -20,9 +20,9 @@ public class ProductStockDTO implements Serializable {
 
     private Long id;
 
-    private ProductDTO product; //PERGUNTAR AO PROFESSOR SE NESTE CASO POSSO SÓ CHAMAR O ID. O QUE É MAIS USUAL E RÁPIDO
+    private Product product; //PERGUNTAR AO PROFESSOR SE NESTE CASO POSSO SÓ CHAMAR O ID. O QUE É MAIS USUAL E RÁPIDO
 
-    private DepositDTO deposit;
+    private Deposit deposit;
 
     private Integer quantity;
 

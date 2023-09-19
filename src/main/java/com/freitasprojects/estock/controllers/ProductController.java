@@ -1,6 +1,5 @@
 package com.freitasprojects.estock.controllers;
 
-import com.freitasprojects.estock.controllers.interfaces.ProductControllerInterface;
 import com.freitasprojects.estock.models.dtos.ProductDTO;
 import com.freitasprojects.estock.services.ProductService;
 import jakarta.validation.Valid;
@@ -15,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/products")
 //@Tag() SWAGGER DOCUMENTATION
-public class ProductController /*implements ProductControllerInterface*/ {
+public class ProductController {
 
     @Autowired
     ProductService service;

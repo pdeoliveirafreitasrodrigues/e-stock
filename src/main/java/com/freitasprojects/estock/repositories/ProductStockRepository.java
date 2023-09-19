@@ -20,4 +20,6 @@ public interface ProductStockRepository extends JpaRepository<ProductStock, Long
             "GROUP BY p.code, p.description, ps.deposit")
     List<Object[]> findProductDetailsInStock();
 
+
+
 }

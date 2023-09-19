@@ -68,7 +68,10 @@ public class ProductService{
 
             if(!productDTO.getDescription().isEmpty())
                 product.setDescription(productDTO.getDescription());
-            if (productDTO.getCostPrice() != null && productDTO.getCostPrice() != 0.0f) {
+            if(productDTO.getCostPrice() == 0.0){
+                throw new Exception("O produto não pode estar zerado");
+            }
+            if (productDTO.getCostPrice() != null && productDTO.getCostPrice() != 0.0) {
                 product.setCostPrice(productDTO.getCostPrice());
             }
             // ...

@@ -4,14 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Collection;
 
-@Data
+//@Data
 @NoArgsConstructor // Gera um construtor sem argumentos
 @AllArgsConstructor // Gera um construtor com todos os argumentos
 public class ProductDTO implements Serializable {
@@ -30,9 +28,39 @@ public class ProductDTO implements Serializable {
     @NotEmpty(message = "O campo descrição não pode estar vazio")
     private String description;
 
-    @NotBlank(message = "O campo preço de custo não pode estar em branco")
-    @NotEmpty(message = "O campo preço de custo não pode estar vazio")
     @DecimalMin(value = MIN_COST_PRICE, message = "O campo preço de custo não pode ser negativo")
-    private Float costPrice;
+    private Double costPrice;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
+    }
 }

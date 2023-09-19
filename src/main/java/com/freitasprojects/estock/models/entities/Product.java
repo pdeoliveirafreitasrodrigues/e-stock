@@ -13,12 +13,12 @@ public class Product {
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
-    private Float costPrice;
+    private Double costPrice;
 
     public Product() {
     }
 
-    public Product(Long id, String code, String description, Float costPrice) {
+    public Product(Long id, String code, String description, Double costPrice) {
         this.id = id;
         this.code = code;
         this.description = description;
@@ -49,11 +49,11 @@ public class Product {
         this.description = description;
     }
 
-    public Float getCostPrice() {
+    public Double getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(Float costPrice) {
+    public void setCostPrice(Double costPrice) {
         this.costPrice = costPrice;
     }
 
