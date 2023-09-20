@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.freitasprojects.estock.consts.ExceptionConsts.*;
+
+
 @Service
 public class ProductStockService {
 
@@ -48,6 +51,28 @@ public class ProductStockService {
 
         return productStockDTO;
     }
+
+    public void deleteById(Long id){
+        repository.deleteById(id);
+    }
+
+
+    public Long save(ProductStockDTO productStockDTO) throws Exception {
+        try {
+            ProductStock productStock = mapper.map(productStockDTO, ProductStock.class);
+            ProductStock created = repository.save(productStock);
+
+            return created.getId();
+        } catch (Exception e) {
+            throw new Exception(PRODUCTSTOCK_INSERT_ERROR);
+        }
+    }
+
+
+    public Long create(ProductStockDTO productStockDTO) throws Exception{
+        return save(productStockDTO);
+    }
+
 
 
 

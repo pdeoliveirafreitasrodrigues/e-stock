@@ -2,12 +2,10 @@ package com.freitasprojects.estock.controllers;
 
 import com.freitasprojects.estock.models.dtos.ProductStockDTO;
 import com.freitasprojects.estock.services.ProductStockService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,15 +16,15 @@ public class ProductStockController {
     @Autowired
     ProductStockService service;
 
-    @GetMapping
+   /* @GetMapping
     public List<Object[]> findAllProductsAndQuantitiesInStock() {
         return service.findAllProductsAndQuantitiesInStock();
-    }
+    }*/
 
-    @GetMapping
+    /*@GetMapping
     public List<Object[]> findProductDetailsInStock() {
         return service.findProductDetailsInStock();
-    }
+    }*/
 
     @GetMapping
     public List<ProductStockDTO> listAll() {
@@ -42,6 +40,18 @@ public class ProductStockController {
         }
 
         return ResponseEntity.ok(productStockDTO);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteById(Long id){
+        service.deleteById(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> create(@Valid @RequestBody ProductStockDTO productStockDTO){
+     try {
+
+     }
     }
 
 

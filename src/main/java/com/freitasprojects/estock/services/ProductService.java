@@ -5,12 +5,13 @@ import com.freitasprojects.estock.models.entities.Product;
 import com.freitasprojects.estock.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.freitasprojects.estock.consts.ExceptionConsts.PRODUCT_INSERT_ERROR;
+import static com.freitasprojects.estock.consts.ExceptionConsts.*;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -69,7 +70,7 @@ public class ProductService{
             if(!productDTO.getDescription().isEmpty())
                 product.setDescription(productDTO.getDescription());
             if(productDTO.getCostPrice() == 0.0){
-                throw new Exception("O produto não pode estar zerado");
+                throw new Exception(PRODUCT_UPDATE_ERROR);
             }
             if (productDTO.getCostPrice() != null && productDTO.getCostPrice() != 0.0) {
                 product.setCostPrice(productDTO.getCostPrice());
