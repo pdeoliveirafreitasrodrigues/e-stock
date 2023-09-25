@@ -20,13 +20,13 @@ public class ProductStockDTO implements Serializable {
 
     private Long id;
 
-    private Product product; //PERGUNTAR AO PROFESSOR SE NESTE CASO POSSO SÓ CHAMAR O ID. O QUE É MAIS USUAL E RÁPIDO
+    private Long productId; //PERGUNTAR AO PROFESSOR SE NESTE CASO POSSO SÓ CHAMAR O ID. O QUE É MAIS USUAL E RÁPIDO
 
-    private Deposit deposit;
+    private Long depositId;
 
     private Integer quantity;
 
     @DecimalMin(value = MIN_COST_PRICE, message = "O campo preço de custo total não pode ser negativo")
-    private Float totalCostPrice;
+    private Double totalCostPrice;
 
 }

@@ -8,25 +8,25 @@ public class ProductStock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Product product;
+    @Column(name = "product_id") // Mapeia o ID do produto
+    private Long productId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Deposit deposit;
+    @Column(name = "deposit_id") // Mapeia o ID do depósito
+    private Long depositId;
 
     @Column(nullable = false)
     private Integer quantity;
     @Column(nullable = false)
-    private Float totalCostPrice;
+    private Double totalCostPrice;
 
 
     public ProductStock() {
     }
 
-    public ProductStock(Long id, Product product, Deposit deposit, Integer quantity, Float totalCostPrice) {
+    public ProductStock(Long id, Long productId, Long depositId, Integer quantity, Double totalCostPrice) {
         this.id = id;
-        this.product = product;
-        this.deposit = deposit;
+        this.productId = productId;
+        this.depositId = depositId;
         this.quantity = quantity;
         this.totalCostPrice = totalCostPrice;
     }
@@ -39,20 +39,20 @@ public class ProductStock {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public Deposit getDeposit() {
-        return deposit;
+    public Long getDepositId() {
+        return depositId;
     }
 
-    public void setDeposit(Deposit deposit) {
-        this.deposit = deposit;
+    public void setDepositId(Long depositId) {
+        this.depositId = depositId;
     }
 
     public Integer getQuantity() {
@@ -63,11 +63,11 @@ public class ProductStock {
         this.quantity = quantity;
     }
 
-    public Float getTotalCostPrice() {
+    public Double getTotalCostPrice() {
         return totalCostPrice;
     }
 
-    public void setTotalCostPrice(Float totalCostPrice) {
+    public void setTotalCostPrice(Double totalCostPrice) {
         this.totalCostPrice = totalCostPrice;
     }
 
@@ -75,8 +75,8 @@ public class ProductStock {
     public String toString() {
         return "ProductStock{" +
                 "id=" + id +
-                ", product=" + product +
-                ", deposit=" + deposit +
+                ", productId=" + productId +
+                ", depositId=" + depositId +
                 ", quantity=" + quantity +
                 ", totalCostPrice=" + totalCostPrice +
                 '}';

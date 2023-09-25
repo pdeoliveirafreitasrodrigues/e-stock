@@ -1,10 +1,12 @@
 package com.freitasprojects.estock.controllers;
 
+import com.freitasprojects.estock.models.dtos.ProductDTO;
 import com.freitasprojects.estock.models.dtos.ProductStockDTO;
 import com.freitasprojects.estock.services.ProductStockService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,17 +18,17 @@ public class ProductStockController {
     @Autowired
     ProductStockService service;
 
-   /* @GetMapping
+    @GetMapping(value = "/productsAndQuantitiesInStock")
     public List<Object[]> findAllProductsAndQuantitiesInStock() {
         return service.findAllProductsAndQuantitiesInStock();
-    }*/
+    }
 
-    /*@GetMapping
+    @GetMapping(value = "/detailsInStock")
     public List<Object[]> findProductDetailsInStock() {
         return service.findProductDetailsInStock();
-    }*/
+    }
 
-    @GetMapping
+    @GetMapping(value = "/listAll")
     public List<ProductStockDTO> listAll() {
         return service.listAll();
     }
@@ -50,11 +52,21 @@ public class ProductStockController {
     @PostMapping
     public ResponseEntity<Object> create(@Valid @RequestBody ProductStockDTO productStockDTO){
      try {
-
+        return ResponseEntity.ok(service.create(productStockDTO));
+     } catch (Exception e) {
+         return ResponseEntity.badRequest().body(e.getMessage());
      }
     }
 
-
+    /*@PutMapping("/{id}")
+    public ResponseEntity<String> updateProductStock(@RequestBody @Validated ProductStockDTO productStockDTO) {
+        try {
+            Long updatedProductStockId = service.update(productStockDTO);
+            return ResponseEntity.ok("Produto atualizado com sucesso. ID: " + updatedProductStockId);
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Erro ao atualizar o produto em seu estoque: " + e.getMessage());
+        }
+    }*/
 
 
 }

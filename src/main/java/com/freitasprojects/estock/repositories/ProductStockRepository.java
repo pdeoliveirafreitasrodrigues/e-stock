@@ -11,13 +11,17 @@ import java.util.List;
 @Repository
 public interface ProductStockRepository extends JpaRepository<ProductStock, Long > {
 
-    @Query("SELECT ps.product, SUM(ps.quantity) FROM ProductStock ps GROUP BY ps.product")
+    @Query(value = "SELECT p.id, p.name, SUM(ps.quantity) AS total_quantity " +
+            "FROM product_stock ps " +
+            "JOIN product p ON ps.product_id = p.id " +
+            "GROUP BY p.id, p.name", nativeQuery = true)
     List<Object[]> findAllProductsAndQuantitiesInStock();
 
-    @Query("SELECT p.code, p.description, ps.deposit, SUM(ps.quantity) " +
-            "FROM ProductStock ps " +
-            "JOIN ps.product p " +
-            "GROUP BY p.code, p.description, ps.deposit")
+    @Query(value = "SELECT p.code, p.description, d.name AS deposit_name, SUM(ps.quantity) AS total_quantity " +
+            "FROM product_stock ps " +
+            "JOIN product p ON ps.product_id = p.id " +
+            "JOIN deposit d ON ps.deposit_id = d.id " +
+            "GROUP BY p.code, p.description, d.name", nativeQuery = true)
     List<Object[]> findProductDetailsInStock();
 
 
