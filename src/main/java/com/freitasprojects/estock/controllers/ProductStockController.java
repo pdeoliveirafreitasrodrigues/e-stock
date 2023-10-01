@@ -58,7 +58,14 @@ public class ProductStockController {
      }
     }
 
-    /*@PutMapping("/{id}")
+    /*-- Inserir dois registros de DepositDTO em um único comando
+    INSERT INTO deposit (code, name)
+    VALUES
+    ('DEP001', 'Depósito 1'),
+    ('DEP002', 'Depósito 2');
+*/
+
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateProductStock(@RequestBody @Validated ProductStockDTO productStockDTO) {
         try {
             Long updatedProductStockId = service.update(productStockDTO);
@@ -66,7 +73,7 @@ public class ProductStockController {
         } catch (Exception e) {
             return ResponseEntity.status(400).body("Erro ao atualizar o produto em seu estoque: " + e.getMessage());
         }
-    }*/
+    }
 
 
 }

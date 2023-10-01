@@ -24,11 +24,11 @@ public class ProductStockService {
 
     @Autowired
     ProductStockRepository repository;
-
     @Autowired
     ModelMapper mapper;
 
-    //Repositories auxiliares
+
+    //Services auxiliares
     @Autowired
     ProductService productService;
     @Autowired
@@ -68,39 +68,6 @@ public class ProductStockService {
         repository.deleteById(id);
     }
 
-
-    /*public Long save(ProductStockDTO productStockDTO) throws Exception {
-        try {
-            Long productId = productStockDTO.getProductId(); // Use getProductId para obter o ID do produto
-            Long depositId = productStockDTO.getDepositId(); // Use getDepositId para obter o ID do depósito
-            Integer quantity = productStockDTO.getQuantity();
-
-            // Recupere o produto e o depósito com base nos IDs fornecidos
-            Product product = productRepository.findById(productId)
-                    .orElseThrow(() -> new Exception("Produto não encontrado."));
-            Deposit deposit = depositRepository.findById(depositId)
-                    .orElseThrow(() -> new Exception("Depósito não encontrado."));
-
-            if (quantity >= 0) {
-                double valorTotal = quantity * product.getCostPrice();
-                ProductStock productStock = new ProductStock();
-                productStock.setProduct(product);
-                productStock.setDeposit(deposit);
-                productStock.setQuantity(quantity);
-                productStock.setTotalCostPrice(valorTotal);
-
-                ProductStock created = repository.save(productStock);
-
-                return created.getId();
-            } else {
-                throw new Exception("Quantidades zeradas, preço total não alterado");
-            }
-        } catch (Exception e) {
-            throw new Exception(PRODUCTSTOCK_INSERT_ERROR);
-        }
-    }
-
-    */
     public Long save(ProductStockDTO productStockDTO) throws Exception {
         try {
                 ProductDTO productDTO = productService.findById(productStockDTO.getProductId());
@@ -125,35 +92,60 @@ public class ProductStockService {
     }
 
     public Long create(ProductStockDTO productStockDTO) throws Exception{
+
+        /*// Verificando se o registro já não existe;
+        ProductDTO productInStorage = productService.findById(productStockDTO.getProductId());
+        DepositDTO depositInStorage = depositService.findById(productStockDTO.getDepositId());
+
+        if (productInStorage.getId() == productStockDTO.getProductId() && depositInStorage.getId() == productStockDTO.getDepositId()){
+            update(productStockDTO);
+            return productStockDTO.getId();
+        }else{
+            return save(productStockDTO);
+        }*/
+
         return save(productStockDTO);
     }
 
-    /*public Long update(ProductStockDTO productStockDTO) throws Exception {
-        var optional = repository.findById(productStockDTO.getId());
+    public Long update(ProductStockDTO productStockDTO) throws Exception {
+        Long productStockId = productStockDTO.getId(); // Obtenha o ID do ProductStockDTO
+        if (productStockId == null) {
+            throw new Exception("O ID do ProductStockDTO não pode ser nulo para atualização.");
+        }
+
+        var optional = repository.findById(productStockId);
 
         if (optional.isPresent()) {
             ProductStock productStock = optional.get();
 
             // Atualize a quantidade
-            if (productStockDTO.getQuantity() != null && productStockDTO.getQuantity() > 0) {
+            if (productStockDTO.getQuantity() != null && productStockDTO.getQuantity() >= 0) {
                 int newQuantity = productStockDTO.getQuantity();
                 productStock.setQuantity(newQuantity);
-                pr
 
-                // Verifique se o preço de custo do produto está definido
-                if (productStock.getProductId() != null) {
-                    // Recalcule o preço de custo total
-                    double newTotalCostPrice = newQuantity * productStock.getProduct().getCostPrice();
+                // Atualize o preço de custo total se o preço do produto estiver definido
+                ProductDTO productDTO = productService.findById(productStock.getProductId());
+                if (productDTO != null && productDTO.getCostPrice() != null) {
+                    double newTotalCostPrice = newQuantity * productDTO.getCostPrice();
                     productStock.setTotalCostPrice(newTotalCostPrice);
                 }
-            }
-            // ...
+                // ATUALIZAR DEPÓSITO
+                if (productStockDTO.getDepositId() != null){
+                    Long newDepositId = productStockDTO.getDepositId();
+                    productStock.setDepositId(newDepositId);
+                }
+                // ...
 
-            repository.save(productStock);
-            return productStock.getId();
+                repository.save(productStock);
+                return productStock.getId();
+            } else {
+                throw new Exception("A quantidade deve ser maior ou igual a zero para atualização.");
+            }
+
         } else {
-            throw new Exception("Registro de ProductStock não encontrado.");
+            throw new Exception("ProductStock data not found.");
         }
-    }*/
+    }
+
 
 }

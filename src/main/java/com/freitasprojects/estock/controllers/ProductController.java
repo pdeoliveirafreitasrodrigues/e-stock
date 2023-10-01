@@ -19,7 +19,7 @@ public class ProductController {
     @Autowired
     ProductService service;
 
-    @GetMapping
+    @GetMapping(value = "/listAll")
     public List<ProductDTO> listAll() {
         return service.listAll();
     }
