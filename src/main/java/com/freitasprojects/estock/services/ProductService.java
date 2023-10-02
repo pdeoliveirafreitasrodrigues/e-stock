@@ -85,5 +85,14 @@ public class ProductService{
     }
 
 
+    public ProductDTO findByCode(String code) {
+        Optional<Product> productOptional = productRepository.findByCode(code);
+
+        if (productOptional.isPresent()) {
+            return mapper.map(productOptional.get(), ProductDTO.class);
+        } else {
+            return null;
+        }
+    }
 
 }

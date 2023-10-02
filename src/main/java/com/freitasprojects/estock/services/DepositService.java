@@ -19,7 +19,7 @@ public class DepositService {
     @Autowired
     ModelMapper mapper;
 
-    public DepositDTO findById(Long id){
+    public DepositDTO findById(Long id) throws Exception{
         Optional<Deposit> optional = repository.findById(id);
         DepositDTO depositDTO = null;
 
@@ -27,7 +27,22 @@ public class DepositService {
             depositDTO = mapper.map(optional.get(), DepositDTO.class);
         }
 
-        return depositDTO;
+        if (depositDTO != null){
+            return depositDTO;
+        }else {
+            throw new Exception("Objeto não encontrado");
+        }
+
+    }
+
+    public DepositDTO findByCode(String code) {
+        Optional<Deposit> depositOptional = repository.findByCode(code);
+
+        if (depositOptional.isPresent()) {
+            return mapper.map(depositOptional.get(), DepositDTO.class);
+        } else {
+            return null;
+        }
     }
 
 }
