@@ -21,7 +21,7 @@ public class DepositService {
 
     public DepositDTO findById(Long id) throws Exception{
         Optional<Deposit> optional = repository.findById(id);
-        DepositDTO depositDTO = null;
+        DepositDTO depositDTO = new DepositDTO();
 
         if (optional.isPresent()) {
             depositDTO = mapper.map(optional.get(), DepositDTO.class);
