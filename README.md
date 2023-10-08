@@ -6,6 +6,10 @@
 ## About
 A project to map your products in your deposits.
 
+## Railway Domain
+* Link: https://e-stock-production.up.railway.app
+* **OBS**: Consult the [Insomnia](docs/Insomnia_2023-10-07.json) file to collect API links to test project features.
+
 ## Swagger Documentation
 - Index: [Swagger UI](http://localhost:8080/swagger-ui/index.html#/)
 - JSON: [API Docs (JSON)](http://localhost:8080/api-docs)
