@@ -15,8 +15,9 @@ A project to map your products in your deposits.
 - JSON: [API Docs (JSON)](http://localhost:8080/api-docs)
 - YAML: [API Docs (YAML)](http://localhost:8080/api-docs.yaml)
 
-## Insomnia File
-- [Click to download!](docs/Insomnia_2023-10-07.json)
+## Insomnia Files
+- [LocalHoostLink](docs/Insomnia_2023-10-07.json)
+- [RailwayLink](docs/Insomnia_2023-10-09.json)
 
 ## Class Diagram
 ![Class Diagram](docs/e-stock.png)
