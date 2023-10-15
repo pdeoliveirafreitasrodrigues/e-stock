@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -49,13 +51,27 @@ public class ProductController {
         }
     }
 
-    @PutMapping("/{id}")
+/*    @PutMapping("/{id}")
     public ResponseEntity<String> updateProduct(@RequestBody @Validated ProductDTO productDTO) {
         try {
             Long updatedProductId = service.update(productDTO);
             return ResponseEntity.ok("Produto atualizado com sucesso. ID: " + updatedProductId);
         } catch (Exception e) {
             return ResponseEntity.status(400).body("Erro ao atualizar o produto: " + e.getMessage());
+        }
+    }*/
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Map<String, String>> updateProduct(@RequestBody @Validated ProductDTO productDTO) {
+        try {
+            Long updatedProductId = service.update(productDTO);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Produto atualizado com sucesso. ID: " + updatedProductId);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("error", "Erro ao atualizar o produto: " + e.getMessage());
+            return ResponseEntity.status(400).body(errorResponse);
         }
     }
 
